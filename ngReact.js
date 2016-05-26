@@ -94,7 +94,7 @@
    * @param scope (angular scope)
    *
    * Uses the watchDepth attribute to determine how to watch props on scope.
-   * If watchDepth attribute is NOT reference or collection, watchDepth defaults to deep watching by value
+   * If watchDepth attribute is NOT reference or collection, none, watchDepth defaults to deep watching by value
    */
   function watchProps (watchDepth, scope, watchExpressions, listener){
     if (watchDepth === 'collection' && angular.isFunction(scope.$watchCollection)) {
@@ -111,6 +111,9 @@
           scope.$watch(expr, listener);
         });
       }
+    }
+    else if (watchDepth === 'none') {
+      // ignore
     }
     else {
       //default watchDepth to value if not reference or collection
